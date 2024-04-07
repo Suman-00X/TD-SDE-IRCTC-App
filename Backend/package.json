@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "TD SDE-1 Assignment ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suman-00X/TD-SDE-IRCTC-App.git"
+  },
+  "author": "Suman raj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suman-00X/TD-SDE-IRCTC-App/issues"
+  },
+  "homepage": "https://github.com/Suman-00X/TD-SDE-IRCTC-App#readme"
+}
