@@ -10,7 +10,7 @@ router.get('/trains', getAllTrains);
 router.post('/availability', getTrainAvailability);
 
 // Protected routes (Protecteed by JWT)
-router.post('/book', authenticateUser, bookSeat);
+router.post('/book/:id', authenticateUser, bookSeat);
 router.post('/admin/train/add', authenticateUser, addTrain);
 router.delete('/admin/train/delete/:id', authenticateUser, deleteTrain);
 router.get('/admin/train/getOne/:id', authenticateUser, getOneTrain);

@@ -101,12 +101,13 @@ export const getTrainAvailability = async (req, res) => {
 export const bookSeat = async (req, res) => {
 
     console.log("Booking Started")
+    const { id } = req.params;
   const session = await mongoose.startSession();
   session.startTransaction();
 
   try {
-      const { trainNumber, seatCount } = req.body;
-      const train = await Train.findOne({ trainNumber }).session(session);
+      const { seatCount } = req.body;
+      const train = await Train.findById(id).session(session);
 
       if (!train) {
           await session.abortTransaction();
