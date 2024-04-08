@@ -10,6 +10,19 @@ export const getAllTrains = async (req, res) => {
     }
 };
 
+//get one train
+export const getOneTrain = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const OneTrain = await Train.findById(id);
+      if (!OneTrain) {
+        return res.status(404).json({ error: 'Train not found' });
+      }
+      res.json(OneTrain);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 // Add a new train
 export const addTrain = async (req, res) => {
     try {
@@ -18,9 +31,9 @@ export const addTrain = async (req, res) => {
           trainName, 
           source, 
           destination, 
-          arrivalTime, 
-          departureTime, 
           totalSeats } = req.body;
+
+          console.log(res.body)
 
         // Consistency Check
         const existingTrain = await Train.findOne({ trainNumber });
@@ -33,8 +46,6 @@ export const addTrain = async (req, res) => {
           trainName, 
           source, 
           destination, 
-          arrivalTime, 
-          departureTime, 
           totalSeats });
 
       // Creating a new train
@@ -59,9 +70,12 @@ export const deleteTrain = async (req, res) => {
 // Update a train
 export const updateTrain = async (req, res) => {
     try {
-        const { trainId } = req.params;
-        const updatedTrainData = req.body;
-        await Train.findByIdAndUpdate(trainId, updatedTrainData);
+        const { id } = req.params;
+        const {trainName, trainNumber, source, destination, totalSeats} = req.body;
+        await Train.findByIdAndUpdate(id,
+            {trainName, trainNumber, source, destination, totalSeats}
+            ),
+            { new: true };
         res.status(200).json({ message: 'Train updated successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' });
@@ -85,6 +99,8 @@ export const getTrainAvailability = async (req, res) => {
 
 // Book a seat
 export const bookSeat = async (req, res) => {
+
+    console.log("Booking Started")
   const session = await mongoose.startSession();
   session.startTransaction();
 

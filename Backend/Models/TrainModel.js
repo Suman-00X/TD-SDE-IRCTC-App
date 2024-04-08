@@ -19,14 +19,6 @@ const trainSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  arrivalTime: {
-    type: Date,
-    required: true
-  },
-  departureTime: {
-    type: Date,
-    required: true
-  },
   totalSeats: {
     type: Number,
     required: true

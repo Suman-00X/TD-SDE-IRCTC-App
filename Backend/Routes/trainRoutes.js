@@ -1,7 +1,7 @@
 // trainRoutes.js
 import express from 'express';
-import { addTrain, deleteTrain, updateTrain, getAllTrains, getTrainAvailability, bookSeat } from '../Controllers/trainController.js';
-import { authenticateUser, authenticateAdmin } from '../Middleware/authMiddleware.js';
+import { addTrain, deleteTrain, updateTrain, getAllTrains, getTrainAvailability, bookSeat, getOneTrain } from '../Controllers/trainController.js';
+import { authenticateUser } from '../Middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -11,10 +11,9 @@ router.post('/availability', getTrainAvailability);
 
 // Protected routes (Protecteed by JWT)
 router.post('/book', authenticateUser, bookSeat);
-
-// Admin routes (Protected by API key)
-router.post('/admin/train/add', authenticateAdmin, addTrain);
-router.delete('/admin/train/delete/:trainId', authenticateAdmin, deleteTrain);
-router.put('/admin/train/update/:trainId', authenticateAdmin, updateTrain);
+router.post('/admin/train/add', authenticateUser, addTrain);
+router.delete('/admin/train/delete/:id', authenticateUser, deleteTrain);
+router.get('/admin/train/getOne/:id', authenticateUser, getOneTrain);
+router.put('/admin/train/update/:id', authenticateUser, updateTrain);
 
 export default router;
